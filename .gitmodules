@@ -1,0 +1,9 @@
+[submodule "ztm-sql-database"]
+	path = ztm-sql-database
+	url = https://github.com/devcoons/ztm-sql-database
+[submodule "ztm-propylaea"]
+	path = ztm-propylaea
+	url = https://github.com/devcoons/ztm-propylaea
+[submodule "ztm-service-users"]
+	path = ztm-service-users
+	url = https://github.com/devcoons/ztm-service-users
