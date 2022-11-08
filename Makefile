@@ -32,4 +32,4 @@ ztm-networks:
 
 ztm-phpmyadmin:
 	-docker run --name ztm-phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin
-	-docker network connect ztm-net-db phpmyadmin
+	-docker network connect ztm-net-db ztm-phpmyadmin
