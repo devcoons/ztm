@@ -31,5 +31,5 @@ ztm-networks:
 	-docker network connect ztm-net-db ztm-srv-users-db
 
 ztm-phpmyadmin:
-	-docker run --name phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:8000 phpmyadmin
+	-docker run --name ztm-phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin
 	-docker network connect ztm-net-db phpmyadmin
