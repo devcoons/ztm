@@ -378,6 +378,56 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{oauth_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:2000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users Complete",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{oauth_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:2000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
