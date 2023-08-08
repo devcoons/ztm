@@ -33,3 +33,17 @@ ztm-networks:
 ztm-phpmyadmin:
 	-docker run --name ztm-phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin
 	-docker network connect ztm-net-db ztm-phpmyadmin
+
+run: run-ztm-gateway run-ztm-srv-users
+
+run-ztm-gateway:
+	-docker exec -it -d ztm-gateway sh -c "go run main.go"
+
+run-ztm-srv-users:
+	-docker exec -it -d ztm-srv-users sh -c "go run main.go"
+
+clean:
+	-docker stop ztm-gateway ztm-srv-users ztm-phpmyadmin ztm-srv-users-db >/dev/null 2>&1 || true
+	-docker rm ztm-gateway ztm-srv-users ztm-phpmyadmin ztm-srv-users-db >/dev/null 2>&1 || true
+	-docker images --format "{{.Repository}}:{{.Tag}}" | grep '^ztm-' | awk '{print $1}' | xargs -I {} docker rmi {} >/dev/null 2>&1 || true
+	-docker network rm ztm-net ztm-net-db ztm-net-users >/dev/null 2>&1 || true
