@@ -1,11 +1,189 @@
 {
 	"info": {
-		"_postman_id": "9008c28c-f101-4d11-aa5f-c1d2ffb0f797",
+		"_postman_id": "a78e4f85-1ed9-4c55-b79d-2913179ebf12",
 		"name": "ZTM-Basics",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "12947453"
+		"_exporter_id": "12947453",
+		"_collection_link": "https://devcoons.postman.co/workspace/API-Development~a6ed6a05-9790-4fcc-832a-bf4b088afdee/collection/12947453-a78e4f85-1ed9-4c55-b79d-2913179ebf12?action=share&source=collection_link&creator=12947453"
 	},
 	"item": [
+		{
+			"name": "ZTM-Framework",
+			"item": [
+				{
+					"name": "Services Status",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Configuration [Gateway]",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2000/ztm-framework/configuration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"ztm-framework",
+								"configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Configuration [Users]",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2000/users/ztm-framework/configuration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"users",
+								"ztm-framework",
+								"configuration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication/Authorization",
+			"item": [
+				{
+					"name": "User Registration",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"security\":\"XYZABCFAKE\",\r\n    \"username\":\"test_user\",\r\n    \"password\":\"test_pass\",\r\n    \"email\":\"personal@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();\r",
+									"pm.globals.set(\"oauth_token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"test_user\",\r\n    \"password\":\"test_pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{oauth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2000/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "User (ME)",
 			"item": [
@@ -254,132 +432,6 @@
 			]
 		},
 		{
-			"name": "Get Services",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:2000/services/status",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "2000",
-					"path": [
-						"services",
-						"status"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Registration",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"security\":\"XYZABCFAKE\",\r\n    \"username\":\"test_user\",\r\n    \"password\":\"test_pass\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:2000/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "2000",
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Login",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"const jsonResponse = pm.response.json();\r",
-							"pm.globals.set(\"oauth_token\", jsonResponse.token);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"test_user\",\r\n    \"password\":\"test_pass\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:2000/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "2000",
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Logout",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{oauth_token}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:2000/logout",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "2000",
-					"path": [
-						"logout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Get Users",
 			"request": {
 				"method": "GET",
@@ -416,14 +468,15 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:2000/users",
+					"raw": "http://localhost:2000/users/complete",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "2000",
 					"path": [
-						"users"
+						"users",
+						"complete"
 					]
 				}
 			},
